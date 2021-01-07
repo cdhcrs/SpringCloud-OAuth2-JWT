@@ -1,6 +1,6 @@
 package com.example.info.config;
 
-import com.example.info.R;
+import com.example.common.utils.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
