@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    密码登录
+    <form action="/auth/login" method="post">
+        账号<input type="text" name="username">
+        密码<input type="password" name="password">
+        <input type="text" name="type" value="password" hidden>
+        <input type="submit">
+    </form>
+    手机号登录
+    <form action="/auth/login" method="post">
+        手机号<input type="text" name="phone">
+        验证码<input type="text" name="code"><button type="button" id="phone">获取验证码</button>
+        <input type="text" name="type" value="phone" hidden>
+        <input type="submit">
+    </form>
+    邮箱登录
+    <form action="/auth/login" method="post">
+        邮箱<input type="text" name="email">
+        验证码<input type="text" name="code"><button type="button" id="email">获取验证码</button>
+        <input type="text" name="type" value="email" hidden>
+        <input type="submit">
+    </form>
+</body>
+<script>
+    $("#phone").click(function () {
+        $.ajax({
+            type : "GET",
+            url : "/auth/login/getPhoneCode",
+            success : function(result) {
+                console.log(result);
+            },
+            error : function(e){
+                console.log(e.responseText);
+            }
+        });
+    });
+    $("#email").click(function () {
+        $.ajax({
+            type : "GET",
+            url : "/auth/login/getEmailCode",
+            success : function(result) {
+                console.log(result);
+            },
+            error : function(e){
+                console.log(e.responseText);
+            }
+        });
+    });
+</script>
+</html>

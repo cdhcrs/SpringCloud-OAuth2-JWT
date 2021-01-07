@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: auth
+  # 数据库
+  datasource:
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/logindemo?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password:
+mybatis-plus:
+  type-aliases-package: com.example.auth.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/

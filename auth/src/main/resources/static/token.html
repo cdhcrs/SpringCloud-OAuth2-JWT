@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>授权</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        var token="Bearer "+getUrlParam("access_token");
+        function getUrlParam(name) {
+            //构造一个含有目标参数的正则表达式对象
+            var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+            //匹配目标参数
+            var r = window.location.hash.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            } else {
+                //返回参数值
+                return "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="user">访问用户资源</button>
+    <button id="admin">访问管理员资源</button>
+</body>
+<script>
+    console.log(token);
+    $("#user").click(function () {
+        $.ajax({
+            type : "GET",
+            url : "/info/user/info",
+            /*headers: {
+                "Authorization": token
+            },*/
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization",token);
+            },
+            success : function(result) {
+                alert(result);
+            },
+            error : function(e){
+                alert(e.responseText);
+            }
+        });
+    });
+    $("#admin").click(function () {
+        $.ajax({
+            type : "GET",
+            url : "/info/admin/info",
+            headers: {
+                Authorization: token
+            },
+            success : function(result) {
+                alert(result);
+            },
+            error : function(e){
+                alert(e.responseText);
+            }
+        });
+    });
+</script>
+</html>
